@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NadiKey - Ключарски услуги в Ямбол</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+   
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #ffffff 33%, #00966e 33%, #00966e 66%, #ffffff 66%);
+            background-size: 100% 100%;
+            animation: bgFade 15s infinite ease-in-out;
+        }
+
+      
+        body.no-scroll {
+            overflow: hidden;
+            
+            padding-right: var(--scrollbar-width, 0px); 
+        }
+
+
+        @keyframes bgFade {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        .navbar {
+            background-color: rgba(0, 150, 110, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 5px 0;
+            backdrop-filter: blur(5px);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .navbar .logo {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #FF0000; /* Changed to red */
+            text-shadow: 0 0 5px #00966e;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            background-color: rgba(0, 150, 110, 0.8); 
+            border-radius: 15px;
+            padding: 2px 10px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 8px 12px;
+            font-weight: 600;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #333;
+            text-shadow: 0 0 8px #ffffff;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.5em;
+            color: #ffffff;
+            cursor: pointer;
+            padding: 5px;
+            text-shadow: 0 0 5px #00966e;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('919.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ffffff, #00966e, #ffffff);
+            opacity: 0.2;
+            animation: heroGradient 10s infinite linear;
+            z-index: 1;
+        }
+
+        @keyframes heroGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero .key-anim {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url('key-icon.png') no-repeat center;
+            background-size: contain;
+            animation: float 6s infinite ease-in-out;
+            z-index: 2;
+            box-shadow: 0 0 10px #ffffff;
+        }
+
+        .hero .decorative-lock {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: url('lock-icon.png') no-repeat center;
+            background-size: contain;
+            animation: rotateLock 8s infinite linear;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        @keyframes rotateLock {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #ffffff;
+        }
+
+        /* Ensure the span in hero h1 also has appropriate styling for visibility */
+        .hero h1 span {
+            /* Inherits color from the inline style, but you might want to add text-shadow if it disappears */
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Example: Add a darker shadow for contrast */
+        }
+
+
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            text-shadow: 0 0 5px #ffffff;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(90deg, #00966e, #ffffff);
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s, transform 0.2s;
+            border: 2px solid #ffffff;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ffffff, #00966e, #ffffff);
+            background-size: 200% 200%;
+            animation: neonRotate 3s infinite linear;
+            z-index: -1;
+            border-radius: 5px;
+            opacity: 0.3;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(90deg, #ffffff, #00966e);
+            transform: scale(1.05);
+        }
+
+        .services {
+            padding: 60px 20px;
+           background: linear-gradient(135deg, #ff9696 50%, #ffffff 50%);
+            text-align: center;
+            border-bottom: 2px solid rgba(0, 150, 110, 0.3);
+            position: relative;
+        }
+
+        .services h2 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            animation: slideInUp 1s ease-out;
+            color: #000000;
+            text-shadow: 0 0 5px #ffffff;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 10%;
+            width: 50px;
+            height: 50px;
+            background: url('key-decor.png') no-repeat center;
+            background-size: contain;
+            opacity: 0.1;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-item {
+            padding: 20px;
+            background: linear-gradient(135deg, #ffffff, #f5f0d0);
+            border: 2px solid #00966e;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 5px #00966e, 0 0 10px rgba(0, 150, 110, 0.3);
+        }
+
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2), 0 0 8px #00966e;
+        }
+
+        .service-item i {
+            font-size: 2.5em;
+            color: #00966e;
+            margin-bottom: 15px;
+            text-shadow: 0 0 5px #ffffff;
+        }
+
+        .service-item h3 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .info-sections {
+            padding: 60px 20px;
+           background: linear-gradient(135deg, #ff9696 50%, #ffffff 50%);
+            text-align: center;
+            border-bottom: 2px solid rgba(0, 150, 110, 0.3);
+            position: relative;
+        }
+
+        .info-sections h2 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            animation: slideInUp 1s ease-out;
+            color: #000000;
+            text-shadow: 0 0 5px #ffffff;
+        }
+
+        .info-sections::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 10%;
+            width: 50px;
+            height: 50px;
+            background: url('lock-decor.png') no-repeat center;
+            background-size: contain;
+            opacity: 0.1;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #ffffff, #f5f0d0);
+            padding: 20px;
+            border: 2px solid #00966e;
+            border-radius: 10px;
+            box-shadow: 0 0 5px #00966e, 0 0 10px rgba(0, 150, 110, 0.3);
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .info-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2), 0 0 8px #00966e;
+        }
+
+        .info-box i {
+            font-size: 2em;
+            color: #00966e;
+            margin-bottom: 15px;
+            text-shadow: 0 0 5px #ffffff;
+        }
+
+        .info-box h3 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            font-size: 1em;
+            color: #666;
+        }
+
+        .gallery {
+            padding: 60px 20px;
+          background: linear-gradient(135deg, #ff9696 50%, #ffffff 50%);
+            text-align: center;
+            border-bottom: 2px solid rgba(0, 150, 110, 0.3);
+            position: relative;
+        }
+
+        .gallery h2 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            animation: slideInUp 1s ease-out;
+            color: #000000;
+            text-shadow: 0 0 5px #ffffff;
+        }
+
+        .gallery::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 5%;
+            width: 60px;
+            height: 60px;
+            background: url('key-decor.png') no-repeat center;
+            background-size: contain;
+            opacity: 0.1;
+        }
+
+        .gallery::after {
+            content: '';
+            position: absolute;
+            bottom: 20px;
+            right: 5%;
+            width: 60px;
+            height: 60px;
+            background: url('lock-decor.png') no-repeat center;
+            background-size: contain;
+            opacity: 0.1;
+        }
+
+        .carousel-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .carousel-row {
+            display: flex;
+            white-space: nowrap;
+            animation: slide 30s linear infinite;
+            touch-action: pan-x;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .carousel-row.top {
+            animation-direction: normal;
+        }
+
+        .carousel-row.bottom {
+            animation-direction: reverse;
+        }
+
+        .carousel-row:hover {
+            animation-play-state: paused;
+        }
+
+        .carousel-item {
+            display: inline-block;
+            width: 200px;
+            margin: 10px;
+            flex-shrink: 0;
+            border: 2px solid #00966e;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: block;
+            cursor: pointer;
+        }
+
+        .carousel-item img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 150, 110, 0.5);
+        }
+
+        .gallery-section-title {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.8em;
+            margin: 20px 0 10px;
+            color: #000000;
+            text-shadow: 0 0 5px #ffffff;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .about {
+            padding: 60px 20px;
+          background: linear-gradient(135deg, #ff9696 50%, #ffffff 50%);
+            text-align: center;
+            border-bottom: 2px solid rgba(0, 150, 110, 0.3);
+            position: relative;
+        }
+
+        .about h2 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            animation: slideInUp 1s ease-out;
+            color: #000000;
+            text-shadow: 0 0 5px #ffffff;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 10%;
+            width: 50px;
+            height: 50px;
+            background: url('lock-decor.png') no-repeat center;
+            background-size: contain;
+            opacity: 0.1;
+        }
+
+        .about p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1em;
+            color: #171717;
+        }
+
+        .about-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .about-gallery img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid #00966e;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .about-gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 150, 110, 0.5);
+        }
+
+        .contact {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #ff9696 50%, #ffffff 50%);
+            text-align: center;
+            border-bottom: 2px solid rgba(0, 150, 110, 0.3);
+            position: relative;
+        }
+
+        .contact h2 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            animation: slideInUp 1s ease-out;
+            color: #000000;
+            text-shadow: 0 0 5px #ffffff;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 10%;
+            width: 50px;
+            height: 50px;
+            background: url('key-decor.png') no-repeat center;
+            background-size: contain;
+            opacity: 0.1;
+        }
+
+        .contact-info {
+            max-width: 1200px;
+            margin: 0 auto;
+            font-size: 1.1em;
+            text-align: center;
+        }
+
+        .contact-info a {
+            color: #00966e;
+            text-decoration: none;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: #333;
+            text-shadow: 0 0 8px #ffffff;
+        }
+
+        .working-hours-table {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: linear-gradient(135deg, #ffffff, #ebfff1);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: 2px solid #00966e;
+        }
+
+        .working-hours-table th,
+        .working-hours-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 150, 110, 0.3);
+        }
+
+        .working-hours-table th {
+            background-color: #00966e;
+            color: #ffffff;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 600;
+           
+        }
+
+        .working-hours-table td {
+            color: #333;
+        }
+
+        .working-hours-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .working-hours-table tr.on-call td {
+            color: #808080; 
+            font-weight: 600;
+        }
+
+        .working-hours-table tr.regular td {
+            color: #00966e; 
+        }
+
+        .map-container {
+            max-width: 800px;
+            margin: 20px auto;
+            height: 400px;
+            border: 2px solid #00966e;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #00966e, #ffffff);
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2em;
+            display: none;
+            transition: background 0.3s, transform 0.2s;
+            border: 2px solid #ffffff;
+            box-shadow: 0 0 10px #ffffff;
+        }
+
+        .back-to-top:hover {
+            background: linear-gradient(135deg, #ffffff, #00966e);
+            transform: scale(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            /* Ensure modal content takes full height when opened */
+            /* This is important for iOS to properly manage scroll and clicks */
+            -webkit-overflow-scrolling: touch; /* For smoother scrolling within modal on iOS */
+            overflow-y: auto; /* Allow scrolling if image is too big */
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            border: 2px solid #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px #00966e;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #ffffff;
+            font-size: 2em;
+            cursor: pointer;
+            background: none;
+            border: none;
+            text-shadow: 0 0 10px #00966e;
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #00966e, #ffffff);
+            border: 2px solid #ffffff;
+            font-size: 2em;
+            color: #333;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 0 10px #ffffff;
+        }
+
+        .nav-button:hover {
+            background: linear-gradient(135deg, #ffffff, #00966e);
+            transform: scale(1.1);
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        .faq {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #ff9696 50%, #ffffff 50%);
+            text-align: center;
+            border-bottom: 2px solid rgba(0, 150, 110, 0.3);
+            position: relative;
+        }
+
+        .faq h2 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            animation: slideInUp 1s ease-out;
+            color: #000000;
+            text-shadow: 0 0 5px #ffffff;
+        }
+
+        .faq::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 10%;
+            width: 50px;
+            height: 50px;
+            background: url('key-decor.png') no-repeat center;
+            background-size: contain;
+            opacity: 0.1;
+        }
+
+        .faq-item {
+            max-width: 800px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #ffffff, #ffffff);
+            border: 2px solid #00966e;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-question {
+            padding: 15px 20px;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            position: relative;
+            background: rgba(255, 255, 255, 0.9);
+            transition: background-color 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-shadow: 0 0 3px #ffffff;
+        }
+
+        .faq-question::after {
+            content: '\f107'; /* Font Awesome arrow down */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            transition: transform 0.3s;
+            color: #00966e;
+        }
+
+        .faq-question.active::after {
+            content: '\f106'; /* Font Awesome arrow up */
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 15px 20px;
+            font-size: 1em;
+            color: #666;
+            background: rgba(225, 255, 227, 0.8);
+            display: none;
+            text-align: left;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes moveGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, 50px) rotate(90deg); }
+            50% { transform: translate(100px, 0) rotate(180deg); }
+            75% { transform: translate(50px, -50px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        @keyframes neonRotate {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .navbar {
+                padding: 3px 0;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 40px;
+                left: 0;
+                background: linear-gradient(135deg, #00966e, #ffffff);
+                border-radius: 15px;
+                padding: 5px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            }
+
+            .nav-menu.active {
+                display: flex;
+                animation: slideDown 0.3s ease-in-out;
+            }
+
+            .nav-menu a {
+                margin: 5px 0;
+                padding: 6px;
+                text-align: center;
+                width: 100%;
+                font-size: 0.8em;
+                color: #ffffff;
+            }
+
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+
+            .carousel-item {
+                width: 150px;
+                margin: 5px;
+            }
+
+            .carousel-item img {
+                height: 100px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .map-container {
+                height: 300px;
+            }
+
+            .about-gallery img {
+                width: 200px;
+                height: 150px;
+            }
+
+            .faq h2 {
+                font-size: 2em;
+            }
+
+            .faq-question {
+                font-size: 1em;
+            }
+
+            .faq-answer {
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.5em;
+            }
+
+            .hero p {
+                font-size: 0.9em;
+            }
+
+            .cta-button {
+                padding: 8px 16px;
+                font-size: 0.8em;
+            }
+
+            .services h2, .gallery h2, .about h2, .contact h2, .info-sections h2, .faq h2 {
+                font-size: 2em;
+            }
+
+            .carousel-item {
+                width: 120px;
+                margin: 3px;
+            }
+
+            .carousel-item img {
+                height: 80px;
+            }
+
+            .map-container {
+                height: 250px;
+            }
+
+            .about-gallery {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about-gallery img {
+                width: 100%;
+                max-width: 250px;
+                height: auto;
+            }
+
+            .faq-question {
+                font-size: 0.9em;
+            }
+
+            .faq-answer {
+                font-size: 0.85em;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h3 class="logo">NadiKey</h3>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="nav-menu">
+                <a href="#home">Начало</a>
+                <a href="#services">Услуги</a>
+                <a href="#gallery">Галерия</a>
+                <a href="#about">За нас</a>
+                <a href="#contact">Контакти</a>
+                <a href="#info">Инфо</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1><span style="color: #FF0000;">NadiKey</span> - Вашият надежден ключар в Ямбол</h1>
+            <p>Доверен партньор за бързи и професионални ключарски услуги!</p>
+            <a href="#contact" class="cta-button">Свържете се с нас</a>
+        </div>
+        <div class="key-anim" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
+        <div class="key-anim" style="left: 30%; top: 40%; animation-delay: 1s;"></div>
+        <div class="key-anim" style="left: 50%; top: 60%; animation-delay: 2s;"></div>
+        <div class="key-anim" style="left: 70%; top: 30%; animation-delay: 3s;"></div>
+        <div class="decorative-lock" style="left: 15%; top: 30%;"></div>
+        <div class="decorative-lock" style="right: 15%; top: 50%;"></div>
+    </section>
+
+    <section id="services" class="services">
+        <h2>Нашите услуги</h2>
+        <div class="services-grid">
+            <div class="service-item">
+                <i class="fas fa-unlock-alt"></i>
+                <h3>Аварийно отключване на автомобили</h3>
+                <p>Бързо и безопасно отваряне на врати при загубени ключове или повредени брави и патрони. Аварийно отключване на секретни патрони, метални шкафове, както и демонтаж на блокирал патрон с монтаж на нов.</p>
+            </div>
+            <div class="service-item">
+                <i class="fas fa-tools"></i>
+                <h3>Ремонт и смяна на брави и патрони</h3>
+                <p>Професионална подмяна и ремонт на всякакви видове брави и патрони, включително демонтаж на старата повредена брава и монтаж на нова.</p>
+            </div>
+            <div class="service-item">
+                <i class="fas fa-key"></i>
+                <h3>Автоключарски услуги</h3>
+                <p>Изработваме ключове за всички марки автомобили. Можем да създадем нов ключ според вашия патрон или да програмираме нов ключ при нужда.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="info" class="info-sections">
+        <h2>Защо да изберете нас</h2>
+        <div class="info-grid">
+            <div class="info-box">
+                <i class="fas fa-wrench"></i>
+                <h3>Широк набор от услуги</h3>
+                <p>От аварийно отваряне до изработка на ключове – ние сме готови да помогнем за дома, колата или офиса ви!</p>
+            </div>
+            <div class="info-box">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Удобно разположение в Ямбол</h3>
+                <p>Намираме се в центъра на Ямбол, леснодостъпни, и сме насреща, когато имате нужда от помощ.</p>
+            </div>
+            <div class="info-box">
+                <i class="fas fa-phone"></i>
+                <h3>Винаги на разположение</h3>
+                <p>Не се колебайте да ни потърсите за вашите ключарски проблеми. Ние сме тук, за да ви осигурим бърза и ефективна помощ!</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery">
+        <h2>Галерия</h2>
+        <div class="carousel-container">
+            <h3 class="gallery-section-title">Авто услуги</h3>
+            <div class="carousel-row top">
+                <div class="carousel-item"><img src="333.jpg" alt="Auto Service 1"></div>
+                <div class="carousel-item"><img src="444.jpg" alt="Auto Service 2"></div>
+                <div class="carousel-item"><img src="555.jpg" alt="Auto Service 3"></div>
+                <div class="carousel-item"><img src="111.jpg" alt="Auto Service 4"></div>
+                <div class="carousel-item"><img src="47.jpg" alt="Auto Service 5"></div>
+                <div class="carousel-item"><img src="211.jpg" alt="Home Service 8"></div>
+                <div class="carousel-item"><img src="212.jpg" alt="Home Service 8"></div>
+                <div class="carousel-item"><img src="213.jpg" alt="Home Service 8"></div>
+            </div>
+            <h3 class="gallery-section-title">Домашни услуги</h3>
+            <div class="carousel-row bottom">
+                <div class="carousel-item"><img src="13.jpg" alt="Home Service 1"></div>
+                <div class="carousel-item"><img src="12.jpg" alt="Home Service 2"></div>
+                <div class="carousel-item"><img src="14.jpg" alt="Home Service 3"></div>
+                <div class="carousel-item"><img src="22.jpg" alt="Home Service 4"></div>
+                <div class="carousel-item"><img src="23.jpg" alt="Home Service 5"></div>
+                <div class="carousel-item"><img src="24.jpg" alt="Home Service 6"></div>
+                <div class="carousel-item"><img src="25.jpg" alt="Home Service 7"></div>
+                <div class="carousel-item"><img src="26.jpg" alt="Home Service 8"></div>
+                <div class="carousel-item"><img src="27.jpg" alt="Home Service 8"></div>
+                <div class="carousel-item"><img src="28.jpg" alt="Home Service 8"></div>
+                <div class="carousel-item"><img src="29.jpg" alt="Home Service 8"></div>
+                <div class="carousel-item"><img src="215.jpg" alt="Home Service 8"></div>
+                <div class="carousel-item"><img src="217.jpg" alt="Home Service 8"></div>
+                <div class="carousel-item"><img src="218.jpg" alt="Home Service 8"></div>
+                <div class="carousel-item"><img src="2199.jpg" alt="Home Service 8"></div>
+                <div class="carousel-item"><img src="66.jpg" alt="Home Service 8"></div>
+                <div class="carousel-item"><img src="93.jpg" alt="Home Service 8"></div>
+                <div class="carousel-item"><img src="99.jpg" alt="Home Service 8"></div>
+                <div class="carousel-item"><img src="123.jpg" alt="Home Service 8"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq">
+        <h2>Често задавани въпроси (FAQ)</h2>
+        <div class="faq-item">
+            <div class="faq-question">Колко време отнема изработката на дубликат на ключ?</div>
+            <div class="faq-answer">Обикновено между 5 и 10 минути. Зависи от типа на ключа и натовареността в момента.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Предлагате ли аварийно отключване на врати?</div>
+            <div class="faq-answer">Да, извършваме аварийни посещения при заключени входни врати, загубени ключове и повредени брави. Работим бързо и без щети.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Можете ли да направите ключ по заключалка, ако нямам оригинала?</div>
+            <div class="faq-answer">В повечето случаи – да. Изработваме ключ по ключалка, но процесът отнема повече време и изисква оглед.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Изработвате ли авто ключове с чип и дистанционно?</div>
+            <div class="faq-answer">Да, предлагаме изработка на авто ключове с чип и дистанционно за всички марки и модели. Свържи се с нас!.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Какви видове ключове изработвате?</div>
+            <div class="faq-answer">Изработваме всички видове – обикновени, секретни, касови, специални ключове и автомобилни.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Трябва ли да запиша час?</div>
+            <div class="faq-answer">Не е задължително. Можеш да дойдеш директно в ателието ни по време на работното време. За аварийни случаи – обади се по телефона.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Колко струва дубликат на ключ?</div>
+            <div class="faq-answer">Цените започват от 5 лв. в зависимост от типа на ключа. Обади се или ела на място за точна цена.</div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <h2>За нас</h2>
+        <p>NadiKey е ключарска фирма, базирана в Ямбол. Предлагаме качествени ключарски услуги, които отговарят на нуждите на нашите клиенти. Нашият екип е опитен и способен да се справи с различни задачи – от аварийни случаи до работа с автомобилни ключове.</p>
+        <div class="about-gallery">
+            <img src="z2.jpg" alt="Ателие отпред 1">
+            <img src="z3.jpg" alt="Ателие отпред 2">
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Контакти</h2>
+        <div class="contact-info">
+            <p><strong>Адрес:</strong> ул. "Цар Иван Александър" 5, Ямбол</p>
+            <p><strong>Телефон:</strong> <a href="tel:0878101524">087 810 1524</a></p>
+            <p><strong>Имейл:</strong> <a href="mailto:key1yambol@gmail.com">key1yambol@gmail.com</a></p>
+            <table class="working-hours-table">
+                <tr>
+                    <th>Ден</th>
+                    <th>Работно време</th>
+                </tr>
+                <tr class="regular">
+                    <td>Понеделник</td>
+                    <td>9:00 ч. – 17:00 ч.</td>
+                </tr>
+                <tr class="regular">
+                    <td>Вторник</td>
+                    <td>9:00 ч. – 17:00 ч.</td>
+                </tr>
+                <tr class="regular">
+                    <td>Сряда</td>
+                    <td>9:00 ч. – 17:00 ч.</td>
+                </tr>
+                <tr class="regular">
+                    <td>Четвъртък</td>
+                    <td>9:00 ч. – 17:00 ч.</td>
+                </tr>
+                <tr class="regular">
+                    <td>Петък</td>
+                    <td>9:00 ч. – 17:00 ч.</td>
+                </tr>
+                <tr class="on-call">
+                    <td>Събота</td>
+                    <td>При неотложен проблем</td>
+                </tr>
+                <tr class="on-call">
+                    <td>Неделя</td>
+                    <td>При неотложен проблем</td>
+                </tr>
+            </table>
+        </div>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2942.3852074063957!2d26.501379311646943!3d42.48336262718242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40a6351af778254b%3A0xade2e45cac8904f8!2zTmFkaUtleSDQkNCy0YLQvtC60LvRjtGH0LDRgNGB0LrQuCDQuCDQutC70Y7Rh9Cw0YDRgdC60Lgg0YPRgdC70YPQs9C4!5e0!3m2!1sbg!2sbg!4v1748857299930!5m2!1sbg!2sbg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <a href="#home" class="back-to-top" title="Върни се нагоре">⇧</a>
+
+    <div id="imageModal" class="modal">
+        <span class="close">×</span>
+        <img id="modalImage" class="modal-content" src="">
+        <button class="nav-button prev">❮</button>
+        <button class="nav-button next">❯</button>
+    </div>
+
+    <script type="text/javascript">
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        const navItems = document.querySelectorAll('.nav-menu a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.services, .gallery, .about, .contact, .info-sections, .faq');
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                // Only animate if the element is not already visible and within the viewport
+                if (rect.top <= window.innerHeight * 0.8 && element.style.opacity !== '1') {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        // Run once on load to animate already visible elements
+        document.addEventListener('DOMContentLoaded', animateOnScroll);
+
+
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+
+        const carouselRows = document.querySelectorAll('.carousel-row');
+        carouselRows.forEach(row => {
+            let isDragging = false;
+            let startX;
+            let scrollLeft;
+
+            const startAnimation = () => {
+                row.style.animation = 'slide 30s linear infinite';
+                if (row.classList.contains('top')) {
+                    row.style.animationDirection = 'normal';
+                } else if (row.classList.contains('bottom')) {
+                    row.style.animationDirection = 'reverse';
+                }
+            };
+
+            const stopAnimation = () => {
+                row.style.animationPlayState = 'paused';
+            };
+
+            row.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                startX = e.touches[0].pageX - row.offsetLeft;
+                scrollLeft = row.scrollLeft;
+                stopAnimation(); // Pause animation on touch start
+            });
+
+            row.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault(); // Prevent default scroll behavior
+                const x = e.touches[0].pageX - row.offsetLeft;
+                const walk = (x - startX) * 1.5;
+                row.scrollLeft = scrollLeft - walk;
+            });
+
+            row.addEventListener('touchend', () => {
+                isDragging = false;
+                startAnimation(); // Resume animation on touch end
+            });
+
+            row.addEventListener('mouseleave', () => { // Add mouseleave for desktop
+                if (!isDragging) {
+                    startAnimation();
+                }
+            });
+
+            row.addEventListener('mouseenter', () => { // Add mouseenter for desktop
+                stopAnimation();
+            });
+        });
+
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeModal = document.querySelector('.close');
+        const prevButton = document.querySelector('.prev');
+        const nextButton = document.querySelector('.next');
+        const images = document.querySelectorAll('.carousel-item img, .about-gallery img');
+        let currentImageIndex = 0;
+        let lastScrollY = 0; // To store scroll position
+
+        // Function to lock body scroll
+        function lockBodyScroll() {
+            lastScrollY = window.scrollY; // Save current scroll position
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${lastScrollY}px`;
+            document.body.style.width = '100%';
+            document.body.style.overflowY = 'scroll'; // Allow scrollbar to remain so no jump
+            // Calculate scrollbar width and apply padding to prevent content jump
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+            document.body.style.paddingRight = `${scrollbarWidth}px`;
+            document.body.classList.add('no-scroll'); // Add a class for potential fixed headers adjustment
+        }
+
+        // Function to unlock body scroll
+        function unlockBodyScroll() {
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            document.body.style.overflowY = '';
+            document.body.style.paddingRight = '';
+            document.body.classList.remove('no-scroll'); // Remove the class
+            // Restore scroll position with requestAnimationFrame for smoothness
+            requestAnimationFrame(() => {
+                window.scrollTo(0, lastScrollY);
+            });
+        }
+
+
+        images.forEach((image, index) => {
+            image.addEventListener('click', () => {
+                lockBodyScroll(); // Lock scroll when modal opens
+                modal.style.display = 'flex';
+                modalImage.src = image.src;
+                modalImage.alt = image.alt;
+                currentImageIndex = index;
+                carouselRows.forEach(row => {
+                    row.style.animationPlayState = 'paused';
+                });
+            });
+        });
+
+        const updateModalImage = () => {
+            modalImage.src = images[currentImageIndex].src;
+            modalImage.alt = images[currentImageIndex].alt;
+        };
+
+        prevButton.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent modal click handler from firing
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            updateModalImage();
+        });
+
+        nextButton.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent modal click handler from firing
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            updateModalImage();
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+            unlockBodyScroll(); // Unlock scroll when modal closes
+            carouselRows.forEach(row => {
+                // Restart animation by clearing and re-applying it
+                row.style.animation = 'none';
+                void row.offsetWidth; // Trigger reflow
+                row.style.animation = `slide 30s linear infinite ${row.classList.contains('top') ? 'normal' : 'reverse'}`;
+            });
+        });
+
+        // Click outside modal to close
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                unlockBodyScroll(); // Unlock scroll when modal closes
+                carouselRows.forEach(row => {
+                    row.style.animation = 'none';
+                    void row.offsetWidth; // Trigger reflow
+                    row.style.animation = `slide 30s linear infinite ${row.classList.contains('top') ? 'normal' : 'reverse'}`;
+                });
+            }
+        });
+
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isActive = question.classList.contains('active');
+
+                // Close all other FAQs
+                faqQuestions.forEach(q => q.classList.remove('active'));
+                document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+
+                // Toggle current FAQ
+                if (!isActive) {
+                    question.classList.add('active');
+                    answer.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
